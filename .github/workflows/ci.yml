@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Emacs
+      uses: purcell/setup-emacs@v1
+
+    - name: Run tests
+      run: |
+        emacs --batch -l tests/unit-tests.el
